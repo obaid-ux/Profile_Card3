@@ -1,5 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
+:root {
+  --bg-color: #f0f2f5;
+  --card-bg: #ffffff;
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --title-color: #2e384d;
+  --subtext-color: #7b88a8;
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --social-bg: #eef4ff;
+  --social-color: #007bff;
+  --border-color: #edf2f7;
+  --stat-color: #4a5568;
+  --toggle-bg: #f0f2f5;
+  --toggle-color: #4a5568;
+}
+
+body.dark-mode {
+  --bg-color: #121418;
+  --card-bg: #1e2229;
+  --card-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --title-color: #f1f5f9;
+  --subtext-color: #94a3b8;
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --social-bg: #2d333f;
+  --social-color: #60a5fa;
+  --border-color: #2d333f;
+  --stat-color: #cbd5e1;
+  --toggle-bg: #2d333f;
+  --toggle-color: #f59e0b;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,23 +46,50 @@ body {
     "Segoe UI",
     Roboto,
     sans-serif;
-  background-color: #f0f2f5;
+  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .card {
   position: relative;
   width: 100%;
   max-width: 340px;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 20px;
   padding: 30px 24px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--card-shadow);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--toggle-bg);
+  color: var(--toggle-color);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.08);
 }
 
 .profile-pic {
@@ -43,22 +102,25 @@ body {
   height: 110px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #007bff;
+  border: 3px solid var(--primary-color);
   padding: 3px;
   display: block;
+  transition: border-color 0.3s ease;
 }
 
 h2 {
   font-size: 22px;
   font-weight: 600;
-  color: #2e384d;
+  color: var(--title-color);
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
 p {
   font-size: 14px;
-  color: #7b88a8;
+  color: var(--subtext-color);
   margin-bottom: 18px;
+  transition: color 0.3s ease;
 }
 
 .social {
@@ -72,8 +134,8 @@ p {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #eef4ff;
-  color: #007bff;
+  background-color: var(--social-bg);
+  color: var(--social-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,7 +145,7 @@ p {
 }
 
 .social a:hover {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: #ffffff;
   transform: translateY(-2px);
 }
@@ -104,39 +166,42 @@ p {
   font-family: inherit;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 2px solid #007bff;
+  border: 2px solid var(--primary-color);
   outline: none;
 }
 
 .primary-btn {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
 .primary-btn:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .secondary-btn {
   background-color: transparent;
-  color: #007bff;
+  color: var(--primary-color);
 }
 
 .secondary-btn:hover {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
 }
 
 .stats {
   display: flex;
   justify-content: space-around;
   padding-top: 18px;
-  border-top: 1px solid #edf2f7;
-  color: #4a5568;
+  border-top: 1px solid var(--border-color);
+  color: var(--stat-color);
   font-size: 14px;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .stat-item {
@@ -146,6 +211,7 @@ p {
 }
 
 .stat-item i {
-  color: #007bff;
+  color: var(--primary-color);
   font-size: 15px;
+  transition: color 0.3s ease;
 }
